@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probability Distributions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Probability Distributions</h1>
+    </header>
+    <main>
+        <section id="distributions">
+            <!-- Normal Distribution -->
+            <article id="normal">
+                <h2>Normal Distribution</h2>
+                <p><strong>Parameters:</strong> Mean (μ), Standard Deviation (σ)</p>
+                <p><strong>PDF:</strong> <code>f(x) = (1 / (σ√(2π))) * exp(-((x - μ)² / (2σ²)))</code></p>
+                <p><strong>CDF:</strong> <code>F(x) = 0.5 * [1 + erf((x - μ) / (σ√2))]</code></p>
+                <p><strong>Mean:</strong> μ</p>
+                <p><strong>Variance:</strong> σ²</p>
+                <h3>Solver</h3>
+                <form id="normal-form">
+                    <label for="normal-mu">Mean (μ):</label>
+                    <input type="number" id="normal-mu" step="any" required>
+                    <label for="normal-sigma">Standard Deviation (σ):</label>
+                    <input type="number" id="normal-sigma" step="any" required>
+                    <label for="normal-x">x:</label>
+                    <input type="number" id="normal-x" step="any" required>
+                    <button type="button" onclick="solveNormal()">Solve</button>
+                </form>
+                <p id="normal-result"></p>
+            </article>
+
+            <!-- Binomial Distribution -->
+            <article id="binomial">
+                <h2>Binomial Distribution</h2>
+                <p><strong>Parameters:</strong> Number of Trials (n), Probability of Success (p)</p>
+                <p><strong>PMF:</strong> <code>P(X = k) = C(n, k) * p^k * (1 - p)^(n - k)</code></p>
+                <p><strong>CDF:</strong> <code>F(k) = ∑ P(X = i) for i from 0 to k</code></p>
+                <p><strong>Mean:</strong> np</p>
+                <p><strong>Variance:</strong> np(1 - p)</p>
+                <h3>Solver</h3>
+                <form id="binomial-form">
+                    <label for="binomial-n">Number of Trials (n):</label>
+                    <input type="number" id="binomial-n" required>
+                    <label for="binomial-p">Probability of Success (p):</label>
+                    <input type="number" id="binomial-p" step="any" required>
+                    <label for="binomial-k">k:</label>
+                    <input type="number" id="binomial-k" required>
+                    <button type="button" onclick="solveBinomial()">Solve</button>
+                </form>
+                <p id="binomial-result"></p>
+            </article>
+
+            <!-- Poisson Distribution -->
+            <article id="poisson">
+                <h2>Poisson Distribution</h2>
+                <p><strong>Parameters:</strong> Rate (λ)</p>
+                <p><strong>PMF:</strong> <code>P(X = k) = (λ^k * e^(-λ)) / k!</code></p>
+                <p><strong>CDF:</strong> <code>F(k) = ∑ P(X = i) for i from 0 to k</code></p>
+                <p><strong>Mean:</strong> λ</p>
+                <p><strong>Variance:</strong> λ</p>
+                <h3>Solver</h3>
+                <form id="poisson-form">
+                    <label for="poisson-lambda">Rate (λ):</label>
+                    <input type="number" id="poisson-lambda" step="any" required>
+                    <label for="poisson-k">k:</label>
+                    <input type="number" id="poisson-k" required>
+                    <button type="button" onclick="solvePoisson()">Solve</button>
+                </form>
+                <p id="poisson-result"></p>
+            </article>
+
+            <!-- Exponential Distribution -->
+            <article id="exponential">
+                <h2>Exponential Distribution</h2>
+                <p><strong>Parameters:</strong> Rate (λ)</p>
+                <p><strong>PDF:</strong> <code>f(x) = λ * e^(-λx) for x ≥ 0</code></p>
+                <p><strong>CDF:</strong> <code>F(x) = 1 - e^(-λx)</code></p>
+                <p><strong>Mean:</strong> 1/λ</p>
+                <p><strong>Variance:</strong> 1/λ²</p>
+                <h3>Solver</h3>
+                <form id="exponential-form">
+                    <label for="exponential-lambda">Rate (λ):</label>
+                    <input type="number" id="exponential-lambda" step="any" required>
+                    <label for="exponential-x">x:</label>
+                    <input type="number" id="exponential-x" step="any" required>
+                    <button type="button" onclick="solveExponential()">Solve</button>
+                </form>
+                <p id="exponential-result"></p>
+            </article>
+
+            <!-- Uniform Distribution -->
+            <article id="uniform">
+                <h2>Uniform Distribution</h2>
+                <p><strong>Parameters:</strong> Lower bound (a), Upper bound (b)</p>
+                <p><strong>PDF:</strong> <code>f(x) = 1 / (b - a) for a ≤ x ≤ b</code></p>
+                <p><strong>CDF:</strong> <code>F(x) = (x - a) / (b - a) for a ≤ x ≤ b</code></p>
+                <p><strong>Mean:</strong> (a + b)/2</p>
+                <p><strong>Variance:</strong> (b - a)² / 12</p>
+                <h3>Solver</h3>
+                <form id="uniform-form">
+                    <label for="uniform-a">Lower bound (a):</label>
+                    <input type="number" id="uniform-a" step="any" required>
+                    <label for="uniform-b">Upper bound (b):</label>
+                    <input type="number" id="uniform-b" step="any" required>
+                    <label for="uniform-x">x:</label>
+                    <input type="number" id="uniform-x" step="any" required>
+                    <button type="button" onclick="solveUniform()">Solve</button>
+                </form>
+                <p id="uniform-result"></p>
+            </article>
+
+            <!-- Bernoulli Distribution -->
+            <article id="bernoulli">
+                <h2>Bernoulli Distribution</h2>
+                <p><strong>Parameters:</strong> Probability of Success (p)</p>
+                <p><strong>PMF:</strong> <code>P(X = k) = p if k = 1, 1 - p if k = 0</code></p>
+                <p><strong>CDF:</strong> <code>F(k) = 0 if k < 0, 1 - p if 0 ≤ k < 1, 1 if k ≥ 1</code></p>
+                <p><strong>Mean:</strong> p</p>
+                <p><strong>Variance:</strong> p(1 - p)</p>
+                <h3>Solver</h3>
+                <form id="bernoulli-form">
+                    <label for="bernoulli-p">Probability of Success (p):</label>
+                    <input type="number" id="bernoulli-p" step="any" required>
+                    <label for="bernoulli-k">k:</label>
+                    <input type="number" id="bernoulli-k" required>
+                    <button type="button" onclick="solveBernoulli()">Solve</button>
+                </form>
+                <p id="bernoulli-result"></p>
+            </article>
+
+            <!-- Gamma Distribution -->
+            <article id="gamma">
+                <h2>Gamma Distribution</h2>
+                <p><strong>Parameters:</strong> Shape parameter (k), Rate parameter (θ)</p>
+                <p><strong>PDF:</strong> <code>f(x) = (x^(k - 1) * e^(-x / θ)) / (θ^k * Γ(k)) for x ≥ 0</code></p>
+                <p><strong>CDF:</strong> <code>F(x) = ∫ f(t) dt from 0 to x</code></p>
+                <p><strong>Mean:</strong> kθ</p>
+                <p><strong>Variance:</strong> kθ²</p>
+                <h3>Solver</h3>
+                <form id="gamma-form">
+                    <label for="gamma-k">Shape parameter (k):</label>
+                    <input type="number" id="gamma-k" step="any" required>
+                    <label for="gamma-theta">Rate parameter (θ):</label>
+                    <input type="number" id="gamma-theta" step="any" required>
+                    <label for="gamma-x">x:</label>
+                    <input type="number" id="gamma-x" step="any" required>
+                    <button type="button" onclick="solveGamma()">Solve</button>
+                </form>
+                <p id="gamma-result"></p>
+            </article>
+
+            <!-- Beta Distribution -->
+            <article id="beta">
+                <h2>Beta Distribution</h2>
+                <p><strong>Parameters:</strong> Shape parameters (α, β)</p>
+                <p><strong>PDF:</strong> <code>f(x) = (x^(α - 1) * (1 - x)^(β - 1)) / B(α, β)</code></p>
+                <p><strong>CDF:</strong> <code>F(x) = ∫ f(t) dt from 0 to x</code></p>
+                <p><strong>Mean:</strong> α / (α + β)</p>
+                <p><strong>Variance:</strong> (αβ) / [(α + β)²(α + β + 1)]</p>
+                <h3>Solver</h3>
+                <form id="beta-form">
+                    <label for="beta-alpha">Shape parameter (α):</label>
+                    <input type="number" id="beta-alpha" step="any" required>
+                    <label for="beta-beta">Shape parameter (β):</label>
+                    <input type="number" id="beta-beta" step="any" required>
+                    <label for="beta-x">x:</label>
+                    <input type="number" id="beta-x" step="any" required>
+                    <button type="button" onclick="solveBeta()">Solve</button>
+                </form>
+                <p id="beta-result"></p>
+            </article>
+
+            <!-- Negative Binomial Distribution -->
+            <article id="negative-binomial">
+                <h2>Negative Binomial Distribution</h2>
+                <p><strong>Parameters:</strong> Number of successes (r), Probability of success (p)</p>
+                <p><strong>PMF:</strong> <code>P(X = k) = C(k + r - 1, k) * (1 - p)^k * p^r</code></p>
+                <p><strong>CDF:</strong> <code>F(k) = ∑ P(X = i) for i from 0 to k</code></p>
+                <p><strong>Mean:</strong> r * (1 - p) / p</p>
+                <p><strong>Variance:</strong> r * (1 - p) / p²</p>
+                <h3>Solver</h3>
+                <form id="negative-binomial-form">
+                    <label for="negative-binomial-r">Number of successes (r):</label>
+                    <input type="number" id="negative-binomial-r" required>
+                    <label for="negative-binomial-p">Probability of success (p):</label>
+                    <input type="number" id="negative-binomial-p" step="any" required>
+                    <label for="negative-binomial-k">k:</label>
+                    <input type="number" id="negative-binomial-k" required>
+                    <button type="button" onclick="solveNegativeBinomial()">Solve</button>
+                </form>
+                <p id="negative-binomial-result"></p>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Probability Distributions</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
